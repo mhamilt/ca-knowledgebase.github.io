@@ -1,0 +1,1071 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Finite Difference with Python</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+<script async="" src="https://www.google-analytics.com/analytics.js"></script>
+<script>
+                        window.ga = window.ga || function () {
+                            (ga.q = ga.q || []).push(arguments) };
+                        ga.l = +new Date;
+                        ga('create', 'UA-207874104-1', 'auto');
+                        ga('set', 'anonymizeIp', true);
+                        ga('send', 'pageview');
+                    </script>
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../_static/logo.png" class="logo" alt="logo">
+      
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Welcome
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../about/code-of-conduct.html">
+   Code of Conduct
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../about/contribution-guide.html">
+   Guide for Contributors
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../about/contribute-suggest.html">
+     Making suggestions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../about/contribute-contribute.html">
+     Contributing material to the site
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../about/code-template.html">
+     Tutorial template
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../about/contribute-user-code.html">
+     Contribute your own computational acoustics code
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../about/contribute-maintain.html">
+     For maintainers
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../about/who-we-are.html">
+   Who We Are
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Core Concepts
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../core-concepts/problem-types.html">
+   Types of problem
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../core-concepts/element-types.html">
+   Types of element
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../core-concepts/meshes.html">
+   Meshes
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Tutorials
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../bem/bem-tutorials-main.html">
+   BEM Tutorials
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../bem/bem-tutorial-1.html">
+     The Boundary Element Method (BEM)
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../fem/fem-tutorials-main.html">
+   FEM Tutorials
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../fem/fenics-helmholtz-tutorial-1.html">
+     The Helmholtz Equation with FEniCS
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="fdtd-tutorials-main.html">
+   FDTD Tutorials
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="simple">
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Software Guides
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../software/software-main.html">
+   Computational acoustics software
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  User Code
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../user/user.html">
+   User code contributions
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Data
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../data/data.html">
+   Data
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Community
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../community/community.html">
+   Community
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Reference
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../reference/glossary.html">
+   Glossary
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../reference/coding.html">
+   Help with coding
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../reference/resources.html">
+   Resources
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/ca-knowledgebase/ca-knowledgebase.github.io/main?urlpath=tree/tutorials/fdtd/fdtd-tutorial-1.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/ca-knowledgebase/ca-knowledgebase.github.io"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/ca-knowledgebase/ca-knowledgebase.github.io/issues/new?title=Issue%20on%20page%20%2Ftutorials/fdtd/fdtd-tutorial-1.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../../_sources/tutorials/fdtd/fdtd-tutorial-1.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-1d-wave">
+   The 1D Wave
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#assumptions">
+     Assumptions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#overview">
+     Overview
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#import-libraries">
+     Import Libraries
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#simulation-parameters">
+       Simulation Parameters
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#coefficients">
+     Coefficients
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#defined">
+       Defined
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#derived">
+       Derived
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#grid">
+       Grid
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#input-ouput">
+       Input / Ouput
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#time-states">
+     Time States
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#initial-condition">
+       Initial Condition
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#matrices">
+     Matrices
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#stencil-shape">
+       Stencil Shape
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#main-time-loop">
+       Main Time Loop
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#audio-output">
+     Audio Output
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Finite Difference with Python</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-1d-wave">
+   The 1D Wave
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#assumptions">
+     Assumptions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#overview">
+     Overview
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#import-libraries">
+     Import Libraries
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#simulation-parameters">
+       Simulation Parameters
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#coefficients">
+     Coefficients
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#defined">
+       Defined
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#derived">
+       Derived
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#grid">
+       Grid
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#input-ouput">
+       Input / Ouput
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#time-states">
+     Time States
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#initial-condition">
+       Initial Condition
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#matrices">
+     Matrices
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#stencil-shape">
+       Stencil Shape
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#main-time-loop">
+       Main Time Loop
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#audio-output">
+     Audio Output
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="finite-difference-with-python">
+<h1>Finite Difference with Python<a class="headerlink" href="#finite-difference-with-python" title="Permalink to this headline">#</a></h1>
+<section id="the-1d-wave">
+<h2>The 1D Wave<a class="headerlink" href="#the-1d-wave" title="Permalink to this headline">#</a></h2>
+<p>This example of FDTD in Python will consider the 1D Wave Equation $<span class="math notranslate nohighlight">\(\ddot{u} = c^2 u^{\prime\prime}\)</span>$</p>
+<section id="assumptions">
+<h3>Assumptions<a class="headerlink" href="#assumptions" title="Permalink to this headline">#</a></h3>
+<p>This tutorials assumes that you are already familiar with the 1D wave equation and its derivation. It also assumes that you have a grasp of the Finite Difference operators and the derivation of the Finite Difference Scheme for the 1D Wave.</p>
+<p>If you are not familiar with the above or need a refresher follow the links below</p>
+<ul class="simple">
+<li><p><span class="xref myst">1D Wave PDE</span></p></li>
+<li><p><span class="xref myst">FDTD Operators</span></p></li>
+<li><p><span class="xref myst">1D Wave FDTD Scheme</span></p></li>
+</ul>
+</section>
+<section id="overview">
+<h3>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">#</a></h3>
+<p>As a reminder, the finite difference scheme for the 1D wave we are trying to implement is:</p>
+<p>\begin{equation*}
+\underbrace{(1+\sigma k)(I)}<em>{A}u^{n+1}  = \underbrace{(\lambda^2D</em>{xx} + 2I}<em>{B})u^{n}  -\underbrace{(1-\sigma k)(I)}</em>{C} u^{n-1}
+\label{eq:scheme} \tag{1}
+\end{equation*}</p>
+<p>\begin{equation*}
+\lambda = \frac{ck}{h}; \quad \sigma = \frac{6\log(10)}{T_{60}}
+\label{eq:courant} \tag{2}
+\end{equation*}</p>
+<p>\begin{align}
+D_{xx} &amp; = \begin{bmatrix}
+-2 &amp; 1 &amp; &amp;   \[0.3em]
+1 &amp; -2 &amp; 1 &amp; \[0.3em]
+&amp; \ddots &amp; \ddots &amp; \ddots  \[0.3em]
+&amp; &amp; 1 &amp; -2
+\end{bmatrix}
+\label{eq:boundmat} \tag{3}
+\end{align}</p>
+<p>Any Finite Difference scheme you need to programnme can likely be split into the following sections</p>
+<ol class="simple">
+<li><p>Import Libraries</p></li>
+<li><p>Coefficients</p>
+<ul class="simple">
+<li><p>Defined</p></li>
+<li><p>Derived</p>
+<ul>
+<li><p>Motion</p></li>
+<li><p>Loss</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Build Coefficient Matrices</p>
+<ul class="simple">
+<li><p>A, B, C</p></li>
+<li><p>Boundary Conditions</p></li>
+</ul>
+</li>
+<li><p>Set up time-state Matrices</p></li>
+<li><p>Set initial conditions</p>
+<ul class="simple">
+<li><p>Generate a raised cosine</p></li>
+</ul>
+</li>
+<li><p>Define time-step state update methods</p></li>
+</ol>
+<ul class="simple">
+<li><p>Appendix A: Scheme class in full.</p></li>
+</ul>
+</section>
+<section id="import-libraries">
+<h3>Import Libraries<a class="headerlink" href="#import-libraries" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">pi</span><span class="p">,</span><span class="n">log</span><span class="p">,</span><span class="n">sqrt</span><span class="p">,</span><span class="n">floor</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">sparse</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="simulation-parameters">
+<h4>Simulation Parameters<a class="headerlink" href="#simulation-parameters" title="Permalink to this headline">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">SR</span> <span class="o">=</span> <span class="mf">44100.0</span><span class="p">;</span>    <span class="c1"># sample rate (Hz)</span>
+<span class="n">Tf</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">;</span>        <span class="c1"># duration of simulation (s)</span>
+<span class="n">xi</span> <span class="o">=</span> <span class="mf">0.8</span><span class="p">;</span>        <span class="c1"># coordinate of excitation (normalised, 0 - 1)</span>
+<span class="n">xo</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">;</span>        <span class="c1"># coordinate of output (normalised, 0 - 1)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="coefficients">
+<h3>Coefficients<a class="headerlink" href="#coefficients" title="Permalink to this headline">#</a></h3>
+<section id="defined">
+<h4>Defined<a class="headerlink" href="#defined" title="Permalink to this headline">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f0</span>  <span class="o">=</span> <span class="mf">440.0</span><span class="p">;</span>   <span class="c1"># fundamental frequency (Hz)</span>
+<span class="n">r</span>   <span class="o">=</span> <span class="mf">1.27e-4</span><span class="p">;</span> <span class="c1"># string radius (m)</span>
+<span class="n">L</span>   <span class="o">=</span> <span class="mf">1.0</span><span class="p">;</span>     <span class="c1"># length (m)</span>
+<span class="n">rho</span> <span class="o">=</span> <span class="mi">7850</span><span class="p">;</span>    <span class="c1"># density (kg/m^3) of steel</span>
+<span class="n">T60</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">;</span>     <span class="c1"># T60 (s)</span>
+<span class="n">bc</span>  <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>        <span class="c1"># boundary condition 1: pivot; 2: clamped</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="derived">
+<h4>Derived<a class="headerlink" href="#derived" title="Permalink to this headline">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">T</span> <span class="o">=</span> <span class="n">rho</span> <span class="o">*</span> <span class="n">pi</span> <span class="o">*</span> <span class="p">((</span><span class="n">f0</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">L</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">r</span><span class="o">**</span><span class="mi">2</span><span class="p">);</span> <span class="c1"># Tension in Newtons</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">pi</span> <span class="o">*</span> <span class="p">(</span><span class="n">r</span> <span class="o">**</span> <span class="mf">2.0</span><span class="p">);</span>         <span class="c1"># string cross-sectional area</span>
+<span class="n">I</span> <span class="o">=</span> <span class="mf">0.25</span> <span class="o">*</span> <span class="n">pi</span> <span class="o">*</span> <span class="p">(</span><span class="n">r</span> <span class="o">**</span> <span class="mf">4.0</span><span class="p">);</span>  <span class="c1"># string moment of intertia</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span> <span class="n">T</span> <span class="o">/</span> <span class="p">(</span><span class="n">rho</span> <span class="o">*</span> <span class="n">A</span><span class="p">));</span>    <span class="c1"># wave speed</span>
+<span class="n">sig</span> <span class="o">=</span> <span class="mf">6.0</span> <span class="o">*</span> <span class="n">log</span><span class="p">(</span><span class="mf">10.0</span><span class="p">)</span> <span class="o">/</span> <span class="n">T60</span><span class="p">;</span> <span class="c1"># loss parameter</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="grid">
+<h4>Grid<a class="headerlink" href="#grid" title="Permalink to this headline">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">k</span>    <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">SR</span><span class="p">;</span> <span class="c1"># time step</span>
+<span class="n">hmin</span> <span class="o">=</span> <span class="n">c</span> <span class="o">*</span> <span class="n">k</span><span class="p">;</span> <span class="c1"># stability condition </span>
+<span class="n">hmin</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">c</span><span class="o">**</span><span class="mf">2.</span><span class="o">*</span><span class="n">k</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">c</span> <span class="o">**</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">k</span><span class="o">**</span><span class="mi">4</span><span class="p">)));</span>    <span class="c1"># minimal grid spacing</span>
+
+<span class="n">N</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">floor</span><span class="p">(</span><span class="n">L</span> <span class="o">/</span> <span class="n">hmin</span><span class="p">));</span> <span class="c1"># number of segments (N+1 is number of grid points)</span>
+<span class="n">h</span> <span class="o">=</span> <span class="n">L</span> <span class="o">/</span> <span class="n">N</span><span class="p">;</span>                <span class="c1"># adjusted grid spacing</span>
+
+<span class="n">lamb</span> <span class="o">=</span> <span class="n">c</span> <span class="o">*</span> <span class="n">k</span> <span class="o">/</span> <span class="n">h</span><span class="p">;</span>           <span class="c1"># Courant number</span>
+<span class="n">Nf</span>   <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">floor</span><span class="p">(</span><span class="n">SR</span> <span class="o">*</span> <span class="n">Tf</span><span class="p">));</span> <span class="c1"># number of time steps</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="input-ouput">
+<h4>Input / Ouput<a class="headerlink" href="#input-ouput" title="Permalink to this headline">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">li</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">floor</span><span class="p">(</span><span class="n">xi</span> <span class="o">*</span> <span class="n">N</span><span class="p">));</span>         <span class="c1"># grid index of excitation</span>
+<span class="n">lo</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">floor</span><span class="p">(</span><span class="n">xo</span> <span class="o">*</span> <span class="n">N</span><span class="p">));</span>         <span class="c1"># grid index of output</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="time-states">
+<h3>Time States<a class="headerlink" href="#time-states" title="Permalink to this headline">#</a></h3>
+<p>Allocate the correct amount of memory using <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.zeros.html"><code class="docutils literal notranslate"><span class="pre">np.zeros()</span></code></a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">u0</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+<span class="n">u1</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+<span class="n">u2</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+
+<span class="n">out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">Nf</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="initial-condition">
+<h4>Initial Condition<a class="headerlink" href="#initial-condition" title="Permalink to this headline">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">u1</span><span class="p">[</span><span class="n">li</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="matrices">
+<h3>Matrices<a class="headerlink" href="#matrices" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Dxx</span> <span class="o">=</span> <span class="n">sparse</span><span class="o">.</span><span class="n">diags</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">N</span><span class="p">))</span><span class="o">.</span><span class="n">tocsc</span><span class="p">()</span>
+
+<span class="n">A</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="p">(</span><span class="n">k</span> <span class="o">*</span> <span class="n">sig</span><span class="p">))</span> <span class="c1"># inverted</span>
+<span class="n">B</span> <span class="o">=</span> <span class="n">A</span> <span class="o">*</span> <span class="p">((</span><span class="n">lamb</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">Dxx</span> <span class="o">+</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">sparse</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">N</span><span class="p">)));</span>
+<span class="n">C</span> <span class="o">=</span> <span class="n">A</span> <span class="o">*</span> <span class="p">((</span><span class="o">-</span><span class="mf">1.0</span> <span class="o">+</span> <span class="p">(</span><span class="n">k</span> <span class="o">*</span> <span class="n">sig</span><span class="p">))</span>  <span class="o">*</span> <span class="n">sparse</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">N</span><span class="p">));</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">todense</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[-0.99937364  0.          0.         ...  0.          0.
+   0.        ]
+ [ 0.         -0.99937364  0.         ...  0.          0.
+   0.        ]
+ [ 0.          0.         -0.99937364 ...  0.          0.
+   0.        ]
+ ...
+ [ 0.          0.          0.         ... -0.99937364  0.
+   0.        ]
+ [ 0.          0.          0.         ...  0.         -0.99937364
+   0.        ]
+ [ 0.          0.          0.         ...  0.          0.
+  -0.99937364]]
+</pre></div>
+</div>
+</div>
+</div>
+<section id="stencil-shape">
+<h4>Stencil Shape<a class="headerlink" href="#stencil-shape" title="Permalink to this headline">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">spy</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/fdtd-tutorial-1_20_0.png" src="../../_images/fdtd-tutorial-1_20_0.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">spy</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/fdtd-tutorial-1_21_0.png" src="../../_images/fdtd-tutorial-1_21_0.png" />
+</div>
+</div>
+</section>
+<section id="main-time-loop">
+<h4>Main Time Loop<a class="headerlink" href="#main-time-loop" title="Permalink to this headline">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Nf</span><span class="p">):</span>
+    <span class="n">u0</span> <span class="o">=</span> <span class="n">B</span> <span class="o">*</span> <span class="n">u1</span> <span class="o">+</span> <span class="n">C</span> <span class="o">*</span> <span class="n">u2</span>
+    <span class="n">u2</span><span class="p">,</span> <span class="n">u1</span><span class="p">,</span> <span class="n">u0</span> <span class="o">=</span> <span class="n">u1</span><span class="p">,</span> <span class="n">u0</span><span class="p">,</span> <span class="n">u2</span> <span class="c1"># state swap</span>
+    <span class="n">out</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">u0</span><span class="p">[</span><span class="n">lo</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="audio-output">
+<h3>Audio Output<a class="headerlink" href="#audio-output" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">IPython.display</span> <span class="k">as</span> <span class="nn">ipd</span>
+
+<span class="n">ipd</span><span class="o">.</span><span class="n">Audio</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">out</span><span class="p">,</span> <span class="n">rate</span><span class="o">=</span><span class="n">SR</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+<audio  controls="controls" >
+    <source src="data:audio/wav;base64,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" type="audio/wav" />
+    Your browser does not support the audio element.
+</audio>
+</div></div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./tutorials/fdtd"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By UKAN Computational Acoustics Special Interest Group<br/>
+  
+    <div class="extra_footer">
+      <p>
+This site and its contents are licensed under the <a href="https://opensource.org/licenses/BSD-3-Clause" alt="link to license text">3-Clause BSD License</a>.
+</p>
+
+    </div>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
