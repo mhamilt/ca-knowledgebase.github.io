@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Finite Difference with Python</title>
+    <title>The 1D Wave</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -246,7 +246,7 @@ const thebe_selector_output = ".output, .cell_output"
   <ul class="current">
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
-     Finite Difference with Python
+     The 1D Wave
     </a>
    </li>
   </ul>
@@ -528,94 +528,87 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#the-1d-wave">
-   The 1D Wave
+  <a class="reference internal nav-link" href="#assumptions">
+   Assumptions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#overview">
+   Overview
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#import-libraries">
+   Import Libraries
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#assumptions">
-     Assumptions
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#overview">
-     Overview
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#import-libraries">
-     Import Libraries
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#simulation-parameters">
-       Simulation Parameters
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#coefficients">
-     Coefficients
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#defined">
-       Defined
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#derived">
-       Derived
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#grid">
-       Grid
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#input-ouput">
-       Input / Ouput
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#time-states">
-     Time States
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#initial-condition">
-       Initial Condition
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#matrices">
-     Matrices
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#stencil-shape">
-       Stencil Shape
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#main-time-loop">
-       Main Time Loop
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#audio-output">
-     Audio Output
+    <a class="reference internal nav-link" href="#simulation-parameters">
+     Simulation Parameters
     </a>
    </li>
   </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#coefficients">
+   Coefficients
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#defined">
+     Defined
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#derived">
+     Derived
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#grid">
+     Grid
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#input-ouput">
+     Input / Ouput
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#time-states">
+   Time States
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#initial-condition">
+     Initial Condition
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#matrices">
+   Matrices
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#stencil-shape">
+     Stencil Shape
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#main-time-loop">
+     Main Time Loop
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#audio-output">
+   Audio Output
+  </a>
  </li>
 </ul>
 
@@ -626,7 +619,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Finite Difference with Python</h1>
+                <h1>The 1D Wave</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -637,94 +630,87 @@ title="Print to PDF"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#the-1d-wave">
-   The 1D Wave
+  <a class="reference internal nav-link" href="#assumptions">
+   Assumptions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#overview">
+   Overview
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#import-libraries">
+   Import Libraries
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#assumptions">
-     Assumptions
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#overview">
-     Overview
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#import-libraries">
-     Import Libraries
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#simulation-parameters">
-       Simulation Parameters
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#coefficients">
-     Coefficients
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#defined">
-       Defined
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#derived">
-       Derived
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#grid">
-       Grid
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#input-ouput">
-       Input / Ouput
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#time-states">
-     Time States
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#initial-condition">
-       Initial Condition
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#matrices">
-     Matrices
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#stencil-shape">
-       Stencil Shape
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#main-time-loop">
-       Main Time Loop
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#audio-output">
-     Audio Output
+    <a class="reference internal nav-link" href="#simulation-parameters">
+     Simulation Parameters
     </a>
    </li>
   </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#coefficients">
+   Coefficients
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#defined">
+     Defined
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#derived">
+     Derived
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#grid">
+     Grid
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#input-ouput">
+     Input / Ouput
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#time-states">
+   Time States
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#initial-condition">
+     Initial Condition
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#matrices">
+   Matrices
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#stencil-shape">
+     Stencil Shape
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#main-time-loop">
+     Main Time Loop
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#audio-output">
+   Audio Output
+  </a>
  </li>
 </ul>
 
@@ -736,13 +722,11 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="finite-difference-with-python">
-<h1>Finite Difference with Python<a class="headerlink" href="#finite-difference-with-python" title="Permalink to this headline">#</a></h1>
-<section id="the-1d-wave">
-<h2>The 1D Wave<a class="headerlink" href="#the-1d-wave" title="Permalink to this headline">#</a></h2>
+  <section class="tex2jax_ignore mathjax_ignore" id="the-1d-wave">
+<h1>The 1D Wave<a class="headerlink" href="#the-1d-wave" title="Permalink to this headline">#</a></h1>
 <p>This example of FDTD in Python will consider the 1D Wave Equation $<span class="math notranslate nohighlight">\(\ddot{u} = c^2 u^{\prime\prime}\)</span>$</p>
 <section id="assumptions">
-<h3>Assumptions<a class="headerlink" href="#assumptions" title="Permalink to this headline">#</a></h3>
+<h2>Assumptions<a class="headerlink" href="#assumptions" title="Permalink to this headline">#</a></h2>
 <p>This tutorials assumes that you are already familiar with the 1D wave equation and its derivation. It also assumes that you have a grasp of the Finite Difference operators and the derivation of the Finite Difference Scheme for the 1D Wave.</p>
 <p>If you are not familiar with the above or need a refresher follow the links below</p>
 <ul class="simple">
@@ -752,25 +736,25 @@ title="Print to PDF"
 </ul>
 </section>
 <section id="overview">
-<h3>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">#</a></h3>
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">#</a></h2>
 <p>As a reminder, the finite difference scheme for the 1D wave we are trying to implement is:</p>
-<p>\begin{equation*}
-\underbrace{(1+\sigma k)(I)}<em>{A}u^{n+1}  = \underbrace{(\lambda^2D</em>{xx} + 2I}<em>{B})u^{n}  -\underbrace{(1-\sigma k)(I)}</em>{C} u^{n-1}
-\label{eq:scheme} \tag{1}
-\end{equation*}</p>
-<p>\begin{equation*}
+<div class="math notranslate nohighlight">
+\[
+\underbrace{(1+\sigma k)(I)}_{A}u^{n+1}  = \underbrace{(\lambda^2D_{xx} + 2I}_{B})u^{n}  -\underbrace{(1-\sigma k)(I)}_{C} u^{n-1} 
+\]</div>
+<div class="math notranslate nohighlight">
+\[
 \lambda = \frac{ck}{h}; \quad \sigma = \frac{6\log(10)}{T_{60}}
-\label{eq:courant} \tag{2}
-\end{equation*}</p>
-<p>\begin{align}
-D_{xx} &amp; = \begin{bmatrix}
--2 &amp; 1 &amp; &amp;   \[0.3em]
-1 &amp; -2 &amp; 1 &amp; \[0.3em]
-&amp; \ddots &amp; \ddots &amp; \ddots  \[0.3em]
-&amp; &amp; 1 &amp; -2
-\end{bmatrix}
-\label{eq:boundmat} \tag{3}
-\end{align}</p>
+\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+D_{xx} = \begin{bmatrix}
+               -2 &amp; 1 &amp; &amp;   \\
+               1 &amp; -2 &amp; 1 &amp; \\
+                  &amp; \ddots &amp; \ddots &amp; \ddots \\
+                  &amp; &amp; 1 &amp; -2
+             \end{bmatrix}
+\end{split}\]</div>
 <p>Any Finite Difference scheme you need to programnme can likely be split into the following sections</p>
 <ol class="simple">
 <li><p>Import Libraries</p></li>
@@ -804,18 +788,18 @@ D_{xx} &amp; = \begin{bmatrix}
 </ul>
 </section>
 <section id="import-libraries">
-<h3>Import Libraries<a class="headerlink" href="#import-libraries" title="Permalink to this headline">#</a></h3>
+<h2>Import Libraries<a class="headerlink" href="#import-libraries" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">pi</span><span class="p">,</span><span class="n">log</span><span class="p">,</span><span class="n">sqrt</span><span class="p">,</span><span class="n">floor</span>
+<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">pi</span><span class="p">,</span> <span class="n">log</span><span class="p">,</span> <span class="n">sqrt</span><span class="p">,</span> <span class="n">floor</span>
 <span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">sparse</span>
 </pre></div>
 </div>
 </div>
 </div>
 <section id="simulation-parameters">
-<h4>Simulation Parameters<a class="headerlink" href="#simulation-parameters" title="Permalink to this headline">#</a></h4>
+<h3>Simulation Parameters<a class="headerlink" href="#simulation-parameters" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">SR</span> <span class="o">=</span> <span class="mf">44100.0</span><span class="p">;</span>    <span class="c1"># sample rate (Hz)</span>
@@ -829,9 +813,9 @@ D_{xx} &amp; = \begin{bmatrix}
 </section>
 </section>
 <section id="coefficients">
-<h3>Coefficients<a class="headerlink" href="#coefficients" title="Permalink to this headline">#</a></h3>
+<h2>Coefficients<a class="headerlink" href="#coefficients" title="Permalink to this headline">#</a></h2>
 <section id="defined">
-<h4>Defined<a class="headerlink" href="#defined" title="Permalink to this headline">#</a></h4>
+<h3>Defined<a class="headerlink" href="#defined" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f0</span>  <span class="o">=</span> <span class="mf">440.0</span><span class="p">;</span>   <span class="c1"># fundamental frequency (Hz)</span>
@@ -846,7 +830,7 @@ D_{xx} &amp; = \begin{bmatrix}
 </div>
 </section>
 <section id="derived">
-<h4>Derived<a class="headerlink" href="#derived" title="Permalink to this headline">#</a></h4>
+<h3>Derived<a class="headerlink" href="#derived" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">T</span> <span class="o">=</span> <span class="n">rho</span> <span class="o">*</span> <span class="n">pi</span> <span class="o">*</span> <span class="p">((</span><span class="n">f0</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">L</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">r</span><span class="o">**</span><span class="mi">2</span><span class="p">);</span> <span class="c1"># Tension in Newtons</span>
@@ -860,7 +844,7 @@ D_{xx} &amp; = \begin{bmatrix}
 </div>
 </section>
 <section id="grid">
-<h4>Grid<a class="headerlink" href="#grid" title="Permalink to this headline">#</a></h4>
+<h3>Grid<a class="headerlink" href="#grid" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">k</span>    <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">SR</span><span class="p">;</span> <span class="c1"># time step</span>
@@ -878,7 +862,7 @@ D_{xx} &amp; = \begin{bmatrix}
 </div>
 </section>
 <section id="input-ouput">
-<h4>Input / Ouput<a class="headerlink" href="#input-ouput" title="Permalink to this headline">#</a></h4>
+<h3>Input / Ouput<a class="headerlink" href="#input-ouput" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">li</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">floor</span><span class="p">(</span><span class="n">xi</span> <span class="o">*</span> <span class="n">N</span><span class="p">));</span>         <span class="c1"># grid index of excitation</span>
@@ -890,7 +874,7 @@ D_{xx} &amp; = \begin{bmatrix}
 </section>
 </section>
 <section id="time-states">
-<h3>Time States<a class="headerlink" href="#time-states" title="Permalink to this headline">#</a></h3>
+<h2>Time States<a class="headerlink" href="#time-states" title="Permalink to this headline">#</a></h2>
 <p>Allocate the correct amount of memory using <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.zeros.html"><code class="docutils literal notranslate"><span class="pre">np.zeros()</span></code></a></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -904,7 +888,7 @@ D_{xx} &amp; = \begin{bmatrix}
 </div>
 </div>
 <section id="initial-condition">
-<h4>Initial Condition<a class="headerlink" href="#initial-condition" title="Permalink to this headline">#</a></h4>
+<h3>Initial Condition<a class="headerlink" href="#initial-condition" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">u1</span><span class="p">[</span><span class="n">li</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">;</span>
@@ -915,7 +899,7 @@ D_{xx} &amp; = \begin{bmatrix}
 </section>
 </section>
 <section id="matrices">
-<h3>Matrices<a class="headerlink" href="#matrices" title="Permalink to this headline">#</a></h3>
+<h2>Matrices<a class="headerlink" href="#matrices" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Dxx</span> <span class="o">=</span> <span class="n">sparse</span><span class="o">.</span><span class="n">diags</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">N</span><span class="p">))</span><span class="o">.</span><span class="n">tocsc</span><span class="p">()</span>
@@ -923,31 +907,12 @@ D_{xx} &amp; = \begin{bmatrix}
 <span class="n">A</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="p">(</span><span class="n">k</span> <span class="o">*</span> <span class="n">sig</span><span class="p">))</span> <span class="c1"># inverted</span>
 <span class="n">B</span> <span class="o">=</span> <span class="n">A</span> <span class="o">*</span> <span class="p">((</span><span class="n">lamb</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">Dxx</span> <span class="o">+</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">sparse</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">N</span><span class="p">)));</span>
 <span class="n">C</span> <span class="o">=</span> <span class="n">A</span> <span class="o">*</span> <span class="p">((</span><span class="o">-</span><span class="mf">1.0</span> <span class="o">+</span> <span class="p">(</span><span class="n">k</span> <span class="o">*</span> <span class="n">sig</span><span class="p">))</span>  <span class="o">*</span> <span class="n">sparse</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">N</span><span class="p">));</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">todense</span><span class="p">())</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[-0.99937364  0.          0.         ...  0.          0.
-   0.        ]
- [ 0.         -0.99937364  0.         ...  0.          0.
-   0.        ]
- [ 0.          0.         -0.99937364 ...  0.          0.
-   0.        ]
- ...
- [ 0.          0.          0.         ... -0.99937364  0.
-   0.        ]
- [ 0.          0.          0.         ...  0.         -0.99937364
-   0.        ]
- [ 0.          0.          0.         ...  0.          0.
-  -0.99937364]]
 </pre></div>
 </div>
 </div>
 </div>
 <section id="stencil-shape">
-<h4>Stencil Shape<a class="headerlink" href="#stencil-shape" title="Permalink to this headline">#</a></h4>
+<h3>Stencil Shape<a class="headerlink" href="#stencil-shape" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
@@ -983,7 +948,7 @@ D_{xx} &amp; = \begin{bmatrix}
 </div>
 </section>
 <section id="main-time-loop">
-<h4>Main Time Loop<a class="headerlink" href="#main-time-loop" title="Permalink to this headline">#</a></h4>
+<h3>Main Time Loop<a class="headerlink" href="#main-time-loop" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Nf</span><span class="p">):</span>
@@ -997,7 +962,7 @@ D_{xx} &amp; = \begin{bmatrix}
 </section>
 </section>
 <section id="audio-output">
-<h3>Audio Output<a class="headerlink" href="#audio-output" title="Permalink to this headline">#</a></h3>
+<h2>Audio Output<a class="headerlink" href="#audio-output" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">IPython.display</span> <span class="k">as</span> <span class="nn">ipd</span>
@@ -1014,7 +979,6 @@ D_{xx} &amp; = \begin{bmatrix}
 </audio>
 </div></div>
 </div>
-</section>
 </section>
 </section>
 
