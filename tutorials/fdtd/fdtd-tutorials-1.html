@@ -1037,10 +1037,10 @@ u^{n}_{l} = \frac{2u^{n-1}_{l} + (\sigma k - 1)u^{n−2} + \lambda^2(u^{n-1}_{l-
 <p>The first set of parameters relate to the actual simulation. This section will contain parameters such as sample rate, duration, input and output points.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">SR</span> <span class="o">=</span> <span class="mf">44100.0</span>    <span class="c1"># sample rate (Hz)</span>
-<span class="n">Tf</span> <span class="o">=</span> <span class="mf">0.5</span>        <span class="c1"># duration of simulation (s)</span>
-<span class="n">xi</span> <span class="o">=</span> <span class="mf">0.8</span>        <span class="c1"># coordinate of excitation (normalised, 0 - 1)</span>
-<span class="n">xo</span> <span class="o">=</span> <span class="mf">0.1</span>        <span class="c1"># coordinate of output (normalised, 0 - 1)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">SR</span> <span class="o">=</span> <span class="mf">44100.0</span>  <span class="c1"># sample rate (Hz)</span>
+<span class="n">Tf</span> <span class="o">=</span> <span class="mf">0.5</span>      <span class="c1"># duration of simulation (s)</span>
+<span class="n">xi</span> <span class="o">=</span> <span class="mf">0.8</span>      <span class="c1"># coordinate of excitation (normalised, 0 - 1)</span>
+<span class="n">xo</span> <span class="o">=</span> <span class="mf">0.1</span>      <span class="c1"># coordinate of output (normalised, 0 - 1)</span>
 </pre></div>
 </div>
 </div>
@@ -1067,10 +1067,10 @@ u^{n}_{l} = \frac{2u^{n-1}_{l} + (\sigma k - 1)u^{n−2} + \lambda^2(u^{n-1}_{l-
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f0</span> <span class="o">=</span> <span class="mf">440.0</span>   <span class="c1"># fundamental frequency (Hz)</span>
-<span class="n">r</span> <span class="o">=</span> <span class="mf">1.27e-4</span> <span class="c1"># string radius (m)</span>
-<span class="n">L</span> <span class="o">=</span> <span class="mf">1.0</span>     <span class="c1"># length (m)</span>
-<span class="n">rho</span> <span class="o">=</span> <span class="mi">7850</span>    <span class="c1"># density (kg/m^3) of steel</span>
-<span class="n">T60</span> <span class="o">=</span> <span class="mf">0.5</span>     <span class="c1"># T60 (s)</span>
+<span class="n">r</span> <span class="o">=</span> <span class="mf">1.27e-4</span>  <span class="c1"># string radius (m)</span>
+<span class="n">L</span> <span class="o">=</span> <span class="mf">1.0</span>      <span class="c1"># length (m)</span>
+<span class="n">rho</span> <span class="o">=</span> <span class="mi">7850</span>   <span class="c1"># density (kg/m^3) of steel</span>
+<span class="n">T60</span> <span class="o">=</span> <span class="mf">0.5</span>    <span class="c1"># T60 (s)</span>
 </pre></div>
 </div>
 </div>
@@ -1087,9 +1087,9 @@ T =  (2 f_0 L r)^{2}\rho \pi
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">T</span> <span class="o">=</span> <span class="p">((</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">f0</span>  <span class="o">*</span> <span class="n">L</span> <span class="o">*</span> <span class="n">r</span><span class="p">)</span> <span class="o">**</span> <span class="mf">2.0</span><span class="p">)</span> <span class="o">*</span> <span class="n">rho</span> <span class="o">*</span> <span class="n">pi</span>  <span class="c1"># Tension in Newtons</span>
-<span class="n">A</span> <span class="o">=</span> <span class="n">pi</span> <span class="o">*</span> <span class="p">(</span><span class="n">r</span> <span class="o">**</span> <span class="mf">2.0</span><span class="p">)</span>         <span class="c1"># string cross-sectional area</span>
-<span class="n">c</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">T</span> <span class="o">/</span> <span class="p">(</span><span class="n">rho</span> <span class="o">*</span> <span class="n">A</span><span class="p">))</span>     <span class="c1"># wave speed</span>
-<span class="n">sig</span> <span class="o">=</span> <span class="mf">6.0</span> <span class="o">*</span> <span class="n">log</span><span class="p">(</span><span class="mf">10.0</span><span class="p">)</span> <span class="o">/</span> <span class="n">T60</span> <span class="c1"># loss parameter</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">pi</span> <span class="o">*</span> <span class="p">(</span><span class="n">r</span> <span class="o">**</span> <span class="mf">2.0</span><span class="p">)</span>          <span class="c1"># string cross-sectional area</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">T</span> <span class="o">/</span> <span class="p">(</span><span class="n">rho</span> <span class="o">*</span> <span class="n">A</span><span class="p">))</span>      <span class="c1"># wave speed</span>
+<span class="n">sig</span> <span class="o">=</span> <span class="mf">6.0</span> <span class="o">*</span> <span class="n">log</span><span class="p">(</span><span class="mf">10.0</span><span class="p">)</span> <span class="o">/</span> <span class="n">T60</span>  <span class="c1"># loss parameter</span>
 </pre></div>
 </div>
 </div>
