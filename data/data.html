@@ -50,9 +50,12 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Community" href="../community/community.html" />
+    <link rel="next" title="Author biographies" href="../community/bios.html" />
     <link rel="prev" title="User code contributions" href="../user/user.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -177,19 +180,115 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="../core-concepts/problem-types.html">
-   Types of problem
+  <a class="reference internal" href="../core-concepts/why-use-ca.html">
+   Why use Computational Acoustics?
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../core-concepts/element-types.html">
-   Types of element
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../core-concepts/how-define-problem.html">
+   How to define the problem to be solved?
   </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../core-concepts/how-define-problem-what-is-a-pde.html">
+     What is a PDE?
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../core-concepts/how-define-problem-acoustics-pdes.html">
+     Acoustics PDEs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../core-concepts/how-define-problem-other-pdes.html">
+     Other PDEs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../core-concepts/how-define-problem-problem-classes.html">
+     Classes of problem
+    </a>
+   </li>
+  </ul>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../core-concepts/meshes.html">
-   Meshes
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../core-concepts/how-to-solve.html">
+   How does the algorithm solve the problem?
   </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../core-concepts/how-to-solve-weak-form.html">
+     Weak Forms
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../core-concepts/how-to-solve-finite-difference.html">
+     Finite Difference
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../core-concepts/how-to-solve-sums-of-solutions.html">
+     Sums of Analytical Solutions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../core-concepts/how-to-solve-greens-functions.html">
+     Monopoles and free space Green’s Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../core-concepts/how-to-solve-eikonal.html">
+     Eikonal Approximation and Raytracing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../core-concepts/how-to-solve-magic-of-matrices.html">
+     Sums of Analytical Solutions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../core-concepts/geom-and-mesh.html">
+   Geometry and Meshing
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../core-concepts/geom-and-mesh-dimensionality.html">
+     Dimensioanlity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../core-concepts/geom-and-mesh-mesh-structure.html">
+     Mesh Structure
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../core-concepts/geom-and-mesh-elements-and-interpolation.html">
+     Elements and Interpolation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../core-concepts/geom-and-mesh-mesh-refinement.html">
+     Meshes
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
@@ -202,8 +301,8 @@ const thebe_selector_output = ".output, .cell_output"
   <a class="reference internal" href="../tutorials/bem/bem-tutorials-main.html">
    BEM Tutorials
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
-  <label for="toctree-checkbox-2">
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
    <i class="fas fa-chevron-down">
    </i>
   </label>
@@ -219,15 +318,15 @@ const thebe_selector_output = ".output, .cell_output"
   <a class="reference internal" href="../tutorials/fem/fem-tutorials-main.html">
    FEM Tutorials
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
-  <label for="toctree-checkbox-3">
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
    <i class="fas fa-chevron-down">
    </i>
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="../tutorials/fem/fenics-helmholtz-tutorial-1.html">
-     The Helmholtz Equation with FEniCS
+    <a class="reference internal" href="../tutorials/fem/fenicsx-helmholtz-tutorial.html">
+     The Helmholtz Equation with FEniCSx
     </a>
    </li>
   </ul>
@@ -236,8 +335,8 @@ const thebe_selector_output = ".output, .cell_output"
   <a class="reference internal" href="../tutorials/fdtd/fdtd-tutorials-main.html">
    FDTD Tutorials
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
-  <label for="toctree-checkbox-4">
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
    <i class="fas fa-chevron-down">
    </i>
   </label>
@@ -293,8 +392,8 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="../community/community.html">
-   Community
+  <a class="reference internal" href="../community/bios.html">
+   Author biographies
   </a>
  </li>
 </ul>
@@ -425,6 +524,23 @@ title="Open an issue"
 
       </li>
       
+      <li>
+        <a href="https://github.com/ca-knowledgebase/ca-knowledgebase.github.io/edit/main/data/data.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Edit this page"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="headerbtn__text-container">suggest edit</span>
+</a>
+
+      </li>
+      
     </ul>
   </div>
 </div>
@@ -538,10 +654,10 @@ title="Print to PDF"
             <p class="prev-next-title">User code contributions</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="../community/community.html" title="next page">
+    <a class='right-next' id="next-link" href="../community/bios.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Community</p>
+        <p class="prev-next-title">Author biographies</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
@@ -556,7 +672,7 @@ title="Print to PDF"
   
     <div class="extra_footer">
       <p>
-This site and its contents are licensed under the <a href="https://opensource.org/licenses/BSD-3-Clause" alt="link to license text">3-Clause BSD License</a>.
+This site and its contents are licensed under the <a href="https://creativecommons.org/licenses/by/4.0/legalcode" alt="link to license text">Creative Commons Attribution 4.0 International Public License</a>.
 </p>
 
     </div>
