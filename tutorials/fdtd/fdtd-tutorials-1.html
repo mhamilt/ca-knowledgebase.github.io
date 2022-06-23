@@ -990,8 +990,8 @@ u^{n}_{l} = \frac{2u^{n-1}_{l} + (\sigma k - 1)u^{n−2} + \lambda^2(u^{n-1}_{l-
 \]</div>
 <p>Any Finite Difference scheme you need to programme can likely be split into the following sections:</p>
 <ol class="simple">
-<li><p>Import Libraries</p></li>
-<li><p>Parameters</p>
+<li><p><a class="reference external" href="#Import-Libraries">Import Libraries</a></p></li>
+<li><p><a class="reference external" href="#Parameters">Parameters</a></p>
 <ul class="simple">
 <li><p>Simluation Parameters</p></li>
 <li><p>Defined Coefficients</p></li>
@@ -999,7 +999,7 @@ u^{n}_{l} = \frac{2u^{n-1}_{l} + (\sigma k - 1)u^{n−2} + \lambda^2(u^{n-1}_{l-
 <li><p>Grid Coefficients</p></li>
 </ul>
 </li>
-<li><p>Matrix Initialisation</p>
+<li><p><a class="reference external" href="#Matrices">Matrices</a></p>
 <ul class="simple">
 <li><p>Stencil Matrices</p></li>
 <li><p>Coefficient Matrices</p></li>
@@ -1007,7 +1007,7 @@ u^{n}_{l} = \frac{2u^{n-1}_{l} + (\sigma k - 1)u^{n−2} + \lambda^2(u^{n-1}_{l-
 <li><p>Input Output Vectors</p></li>
 </ul>
 </li>
-<li><p>Simulation</p>
+<li><p><a class="reference external" href="#Simulation">Simulation</a></p>
 <ul class="simple">
 <li><p>Initial Conditions</p></li>
 <li><p>Main Time Loop</p></li>
@@ -1037,10 +1037,10 @@ u^{n}_{l} = \frac{2u^{n-1}_{l} + (\sigma k - 1)u^{n−2} + \lambda^2(u^{n-1}_{l-
 <p>The first set of parameters relate to the actual simulation. This section will contain parameters such as sample rate, duration, input and output points.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">SR</span> <span class="o">=</span> <span class="mf">44100.0</span><span class="p">;</span>    <span class="c1"># sample rate (Hz)</span>
-<span class="n">Tf</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">;</span>        <span class="c1"># duration of simulation (s)</span>
-<span class="n">xi</span> <span class="o">=</span> <span class="mf">0.8</span><span class="p">;</span>        <span class="c1"># coordinate of excitation (normalised, 0 - 1)</span>
-<span class="n">xo</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">;</span>        <span class="c1"># coordinate of output (normalised, 0 - 1)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">SR</span> <span class="o">=</span> <span class="mf">44100.0</span>    <span class="c1"># sample rate (Hz)</span>
+<span class="n">Tf</span> <span class="o">=</span> <span class="mf">0.5</span>        <span class="c1"># duration of simulation (s)</span>
+<span class="n">xi</span> <span class="o">=</span> <span class="mf">0.8</span>        <span class="c1"># coordinate of excitation (normalised, 0 - 1)</span>
+<span class="n">xo</span> <span class="o">=</span> <span class="mf">0.1</span>        <span class="c1"># coordinate of output (normalised, 0 - 1)</span>
 </pre></div>
 </div>
 </div>
@@ -1066,11 +1066,11 @@ u^{n}_{l} = \frac{2u^{n-1}_{l} + (\sigma k - 1)u^{n−2} + \lambda^2(u^{n-1}_{l-
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f0</span>  <span class="o">=</span> <span class="mf">440.0</span><span class="p">;</span>   <span class="c1"># fundamental frequency (Hz)</span>
-<span class="n">r</span>   <span class="o">=</span> <span class="mf">1.27e-4</span><span class="p">;</span> <span class="c1"># string radius (m)</span>
-<span class="n">L</span>   <span class="o">=</span> <span class="mf">1.0</span><span class="p">;</span>     <span class="c1"># length (m)</span>
-<span class="n">rho</span> <span class="o">=</span> <span class="mi">7850</span><span class="p">;</span>    <span class="c1"># density (kg/m^3) of steel</span>
-<span class="n">T60</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">;</span>     <span class="c1"># T60 (s)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f0</span>  <span class="o">=</span> <span class="mf">440.0</span>   <span class="c1"># fundamental frequency (Hz)</span>
+<span class="n">r</span>   <span class="o">=</span> <span class="mf">1.27e-4</span> <span class="c1"># string radius (m)</span>
+<span class="n">L</span>   <span class="o">=</span> <span class="mf">1.0</span>     <span class="c1"># length (m)</span>
+<span class="n">rho</span> <span class="o">=</span> <span class="mi">7850</span>    <span class="c1"># density (kg/m^3) of steel</span>
+<span class="n">T60</span> <span class="o">=</span> <span class="mf">0.5</span>     <span class="c1"># T60 (s)</span>
 </pre></div>
 </div>
 </div>
@@ -1086,10 +1086,10 @@ T =  (2 f_0 L r)^{2}\rho \pi
 \]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">T</span> <span class="o">=</span> <span class="p">((</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">f0</span>  <span class="o">*</span> <span class="n">L</span> <span class="o">*</span> <span class="n">r</span><span class="p">)</span> <span class="o">**</span> <span class="mf">2.0</span><span class="p">)</span> <span class="o">*</span> <span class="n">rho</span> <span class="o">*</span> <span class="n">pi</span><span class="p">;</span> <span class="c1"># Tension in Newtons</span>
-<span class="n">A</span> <span class="o">=</span> <span class="n">pi</span> <span class="o">*</span> <span class="p">(</span><span class="n">r</span> <span class="o">**</span> <span class="mf">2.0</span><span class="p">);</span>         <span class="c1"># string cross-sectional area</span>
-<span class="n">c</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span> <span class="n">T</span> <span class="o">/</span> <span class="p">(</span><span class="n">rho</span> <span class="o">*</span> <span class="n">A</span><span class="p">));</span>    <span class="c1"># wave speed</span>
-<span class="n">sig</span> <span class="o">=</span> <span class="mf">6.0</span> <span class="o">*</span> <span class="n">log</span><span class="p">(</span><span class="mf">10.0</span><span class="p">)</span> <span class="o">/</span> <span class="n">T60</span><span class="p">;</span> <span class="c1"># loss parameter</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">T</span> <span class="o">=</span> <span class="p">((</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">f0</span>  <span class="o">*</span> <span class="n">L</span> <span class="o">*</span> <span class="n">r</span><span class="p">)</span> <span class="o">**</span> <span class="mf">2.0</span><span class="p">)</span> <span class="o">*</span> <span class="n">rho</span> <span class="o">*</span> <span class="n">pi</span> <span class="c1"># Tension in Newtons</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">pi</span> <span class="o">*</span> <span class="p">(</span><span class="n">r</span> <span class="o">**</span> <span class="mf">2.0</span><span class="p">)</span>         <span class="c1"># string cross-sectional area</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span> <span class="n">T</span> <span class="o">/</span> <span class="p">(</span><span class="n">rho</span> <span class="o">*</span> <span class="n">A</span><span class="p">))</span>    <span class="c1"># wave speed</span>
+<span class="n">sig</span> <span class="o">=</span> <span class="mf">6.0</span> <span class="o">*</span> <span class="n">log</span><span class="p">(</span><span class="mf">10.0</span><span class="p">)</span> <span class="o">/</span> <span class="n">T60</span> <span class="c1"># loss parameter</span>
 </pre></div>
 </div>
 </div>
@@ -1109,14 +1109,14 @@ T =  (2 f_0 L r)^{2}\rho \pi
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">k</span>    <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">SR</span><span class="p">;</span> <span class="c1"># time step</span>
-<span class="n">hmin</span> <span class="o">=</span> <span class="n">c</span> <span class="o">*</span> <span class="n">k</span><span class="p">;</span>    <span class="c1"># stability condition </span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">k</span>    <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">SR</span> <span class="c1"># time step</span>
+<span class="n">hmin</span> <span class="o">=</span> <span class="n">c</span> <span class="o">*</span> <span class="n">k</span>    <span class="c1"># stability condition </span>
 
-<span class="n">N</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">floor</span><span class="p">(</span><span class="n">L</span> <span class="o">/</span> <span class="n">hmin</span><span class="p">));</span>   <span class="c1"># number of segments (N+1 is number of grid points)</span>
-<span class="n">h</span> <span class="o">=</span> <span class="n">L</span> <span class="o">/</span> <span class="n">N</span><span class="p">;</span>                  <span class="c1"># adjusted grid spacing</span>
+<span class="n">N</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">floor</span><span class="p">(</span><span class="n">L</span> <span class="o">/</span> <span class="n">hmin</span><span class="p">))</span>   <span class="c1"># number of segments (N+1 is number of grid points)</span>
+<span class="n">h</span> <span class="o">=</span> <span class="n">L</span> <span class="o">/</span> <span class="n">N</span>                  <span class="c1"># adjusted grid spacing</span>
 
-<span class="n">lamb</span> <span class="o">=</span> <span class="n">c</span> <span class="o">*</span> <span class="n">k</span> <span class="o">/</span> <span class="n">h</span><span class="p">;</span>           <span class="c1"># Courant number</span>
-<span class="n">Nf</span>   <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">floor</span><span class="p">(</span><span class="n">SR</span> <span class="o">*</span> <span class="n">Tf</span><span class="p">));</span> <span class="c1"># number of time steps</span>
+<span class="n">lamb</span> <span class="o">=</span> <span class="n">c</span> <span class="o">*</span> <span class="n">k</span> <span class="o">/</span> <span class="n">h</span>           <span class="c1"># Courant number</span>
+<span class="n">Nf</span>   <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">floor</span><span class="p">(</span><span class="n">SR</span> <span class="o">*</span> <span class="n">Tf</span><span class="p">))</span> <span class="c1"># number of time steps</span>
 </pre></div>
 </div>
 </div>
@@ -1134,7 +1134,7 @@ T =  (2 f_0 L r)^{2}\rho \pi
 <p>For quality of life we can define some stencil matrices so that our calculations are similar to the update equation.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">I</span>   <span class="o">=</span> <span class="n">sparse</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">N</span><span class="p">);</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">I</span>   <span class="o">=</span> <span class="n">sparse</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
 <span class="n">Dxx</span> <span class="o">=</span> <span class="n">sparse</span><span class="o">.</span><span class="n">diags</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">N</span><span class="p">))</span>
 </pre></div>
 </div>
@@ -1170,8 +1170,8 @@ C &amp;= A^{-1}(\sigma k - 1)I \\
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="p">(</span><span class="n">k</span> <span class="o">*</span> <span class="n">sig</span><span class="p">))</span> <span class="c1"># inverted</span>
-<span class="n">B</span> <span class="o">=</span> <span class="n">A</span> <span class="o">*</span> <span class="p">((</span><span class="n">lamb</span> <span class="o">**</span> <span class="mf">2.0</span><span class="p">)</span> <span class="o">*</span> <span class="n">Dxx</span> <span class="o">+</span> <span class="p">(</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">I</span><span class="p">));</span>
-<span class="n">C</span> <span class="o">=</span> <span class="n">A</span> <span class="o">*</span> <span class="p">((</span><span class="o">-</span><span class="mf">1.0</span> <span class="o">+</span> <span class="p">(</span><span class="n">k</span> <span class="o">*</span> <span class="n">sig</span><span class="p">))</span>  <span class="o">*</span> <span class="n">I</span><span class="p">);</span>
+<span class="n">B</span> <span class="o">=</span> <span class="n">A</span> <span class="o">*</span> <span class="p">((</span><span class="n">lamb</span> <span class="o">**</span> <span class="mf">2.0</span><span class="p">)</span> <span class="o">*</span> <span class="n">Dxx</span> <span class="o">+</span> <span class="p">(</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">I</span><span class="p">))</span>
+<span class="n">C</span> <span class="o">=</span> <span class="n">A</span> <span class="o">*</span> <span class="p">((</span><span class="o">-</span><span class="mf">1.0</span> <span class="o">+</span> <span class="p">(</span><span class="n">k</span> <span class="o">*</span> <span class="n">sig</span><span class="p">))</span>  <span class="o">*</span> <span class="n">I</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1200,7 +1200,7 @@ C &amp;= A^{-1}(\sigma k - 1)I \\
 <h5>C Matrix<a class="headerlink" href="#c-matrix" title="Permalink to this headline">#</a></h5>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">spy</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">spy</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">markersize</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -1234,8 +1234,8 @@ C &amp;= A^{-1}(\sigma k - 1)I \\
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">out</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="n">Nf</span><span class="p">)</span>
 
-<span class="n">li</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">floor</span><span class="p">(</span><span class="n">xi</span> <span class="o">*</span> <span class="n">N</span><span class="p">));</span> <span class="c1"># grid index of excitation</span>
-<span class="n">lo</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">floor</span><span class="p">(</span><span class="n">xo</span> <span class="o">*</span> <span class="n">N</span><span class="p">));</span> <span class="c1"># grid index of output</span>
+<span class="n">li</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">floor</span><span class="p">(</span><span class="n">xi</span> <span class="o">*</span> <span class="n">N</span><span class="p">))</span> <span class="c1"># grid index of excitation</span>
+<span class="n">lo</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">floor</span><span class="p">(</span><span class="n">xo</span> <span class="o">*</span> <span class="n">N</span><span class="p">))</span> <span class="c1"># grid index of output</span>
 </pre></div>
 </div>
 </div>
@@ -1250,7 +1250,7 @@ C &amp;= A^{-1}(\sigma k - 1)I \\
 <p>The intial condition will be a simple delta.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">u1</span><span class="p">[</span><span class="n">li</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">;</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">u1</span><span class="p">[</span><span class="n">li</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
 </pre></div>
 </div>
 </div>
@@ -1323,38 +1323,38 @@ C &amp;= A^{-1}(\sigma k - 1)I \\
 
 <span class="c1">#---------------------------------------------------------------</span>
 <span class="c1"># Simulation Parameters</span>
-<span class="n">SR</span> <span class="o">=</span> <span class="mf">44100.0</span><span class="p">;</span>    <span class="c1"># sample rate (Hz)</span>
-<span class="n">Tf</span> <span class="o">=</span> <span class="mf">5.0</span><span class="p">;</span>        <span class="c1"># duration of simulation (s)</span>
-<span class="n">xi</span> <span class="o">=</span> <span class="mf">0.8</span><span class="p">;</span>        <span class="c1"># coordinate of excitation (normalised, 0 - 1)</span>
-<span class="n">xo</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">;</span>        <span class="c1"># coordinate of output (normalised, 0 - 1)</span>
+<span class="n">SR</span> <span class="o">=</span> <span class="mf">44100.0</span>    <span class="c1"># sample rate (Hz)</span>
+<span class="n">Tf</span> <span class="o">=</span> <span class="mf">5.0</span>        <span class="c1"># duration of simulation (s)</span>
+<span class="n">xi</span> <span class="o">=</span> <span class="mf">0.8</span>        <span class="c1"># coordinate of excitation (normalised, 0 - 1)</span>
+<span class="n">xo</span> <span class="o">=</span> <span class="mf">0.1</span>        <span class="c1"># coordinate of output (normalised, 0 - 1)</span>
 
 <span class="c1"># 1D Wave parameters</span>
-<span class="n">f0</span>  <span class="o">=</span> <span class="mf">110.0</span><span class="p">;</span>   <span class="c1"># fundamental frequency (Hz)</span>
-<span class="n">r</span>   <span class="o">=</span> <span class="mf">1.27e-4</span><span class="p">;</span> <span class="c1"># string radius (m)</span>
-<span class="n">L</span>   <span class="o">=</span> <span class="mf">1.0</span><span class="p">;</span>     <span class="c1"># length (m)</span>
-<span class="n">rho</span> <span class="o">=</span> <span class="mi">7850</span><span class="p">;</span>    <span class="c1"># density (kg/m^3) of steel</span>
-<span class="n">T60</span> <span class="o">=</span> <span class="mf">7.0</span><span class="p">;</span>     <span class="c1"># T60 (s)</span>
+<span class="n">f0</span>  <span class="o">=</span> <span class="mf">110.0</span>   <span class="c1"># fundamental frequency (Hz)</span>
+<span class="n">r</span>   <span class="o">=</span> <span class="mf">1.27e-4</span> <span class="c1"># string radius (m)</span>
+<span class="n">L</span>   <span class="o">=</span> <span class="mf">1.0</span>     <span class="c1"># length (m)</span>
+<span class="n">rho</span> <span class="o">=</span> <span class="mi">7850</span>    <span class="c1"># density (kg/m^3) of steel</span>
+<span class="n">T60</span> <span class="o">=</span> <span class="mf">7.0</span>     <span class="c1"># T60 (s)</span>
 <span class="c1">#---------------------------------------------------------------</span>
-<span class="n">T</span> <span class="o">=</span> <span class="p">((</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">f0</span>  <span class="o">*</span> <span class="n">L</span> <span class="o">*</span> <span class="n">r</span><span class="p">)</span> <span class="o">**</span> <span class="mf">2.0</span><span class="p">)</span> <span class="o">*</span> <span class="n">rho</span> <span class="o">*</span> <span class="n">pi</span><span class="p">;</span> <span class="c1"># Tension in Newtons</span>
-<span class="n">A</span> <span class="o">=</span> <span class="n">pi</span> <span class="o">*</span> <span class="p">(</span><span class="n">r</span> <span class="o">**</span> <span class="mf">2.0</span><span class="p">);</span>         <span class="c1"># string cross-sectional area</span>
-<span class="n">c</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span> <span class="n">T</span> <span class="o">/</span> <span class="p">(</span><span class="n">rho</span> <span class="o">*</span> <span class="n">A</span><span class="p">));</span>    <span class="c1"># wave speed</span>
-<span class="n">sig</span> <span class="o">=</span> <span class="mf">6.0</span> <span class="o">*</span> <span class="n">log</span><span class="p">(</span><span class="mf">10.0</span><span class="p">)</span> <span class="o">/</span> <span class="n">T60</span><span class="p">;</span> <span class="c1"># loss parameter</span>
+<span class="n">T</span> <span class="o">=</span> <span class="p">((</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">f0</span>  <span class="o">*</span> <span class="n">L</span> <span class="o">*</span> <span class="n">r</span><span class="p">)</span> <span class="o">**</span> <span class="mf">2.0</span><span class="p">)</span> <span class="o">*</span> <span class="n">rho</span> <span class="o">*</span> <span class="n">pi</span> <span class="c1"># Tension in Newtons</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">pi</span> <span class="o">*</span> <span class="p">(</span><span class="n">r</span> <span class="o">**</span> <span class="mf">2.0</span><span class="p">)</span>         <span class="c1"># string cross-sectional area</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span> <span class="n">T</span> <span class="o">/</span> <span class="p">(</span><span class="n">rho</span> <span class="o">*</span> <span class="n">A</span><span class="p">))</span>    <span class="c1"># wave speed</span>
+<span class="n">sig</span> <span class="o">=</span> <span class="mf">6.0</span> <span class="o">*</span> <span class="n">log</span><span class="p">(</span><span class="mf">10.0</span><span class="p">)</span> <span class="o">/</span> <span class="n">T60</span> <span class="c1"># loss parameter</span>
 <span class="c1">#---------------------------------------------------------------</span>
-<span class="n">k</span>    <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">SR</span><span class="p">;</span> <span class="c1"># time step</span>
-<span class="n">hmin</span> <span class="o">=</span> <span class="n">c</span> <span class="o">*</span> <span class="n">k</span><span class="p">;</span>    <span class="c1"># stability condition </span>
+<span class="n">k</span>    <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">SR</span> <span class="c1"># time step</span>
+<span class="n">hmin</span> <span class="o">=</span> <span class="n">c</span> <span class="o">*</span> <span class="n">k</span>    <span class="c1"># stability condition </span>
 
-<span class="n">N</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">floor</span><span class="p">(</span><span class="n">L</span> <span class="o">/</span> <span class="n">hmin</span><span class="p">));</span>   <span class="c1"># number of segments (N+1 is number of grid points)</span>
-<span class="n">h</span> <span class="o">=</span> <span class="n">L</span> <span class="o">/</span> <span class="n">N</span><span class="p">;</span>                  <span class="c1"># adjusted grid spacing</span>
+<span class="n">N</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">floor</span><span class="p">(</span><span class="n">L</span> <span class="o">/</span> <span class="n">hmin</span><span class="p">))</span>   <span class="c1"># number of segments (N+1 is number of grid points)</span>
+<span class="n">h</span> <span class="o">=</span> <span class="n">L</span> <span class="o">/</span> <span class="n">N</span>                  <span class="c1"># adjusted grid spacing</span>
 
-<span class="n">lamb</span> <span class="o">=</span> <span class="n">c</span> <span class="o">*</span> <span class="n">k</span> <span class="o">/</span> <span class="n">h</span><span class="p">;</span>           <span class="c1"># Courant number</span>
-<span class="n">Nf</span>   <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">floor</span><span class="p">(</span><span class="n">SR</span> <span class="o">*</span> <span class="n">Tf</span><span class="p">));</span> <span class="c1"># number of time steps</span>
+<span class="n">lamb</span> <span class="o">=</span> <span class="n">c</span> <span class="o">*</span> <span class="n">k</span> <span class="o">/</span> <span class="n">h</span>           <span class="c1"># Courant number</span>
+<span class="n">Nf</span>   <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">floor</span><span class="p">(</span><span class="n">SR</span> <span class="o">*</span> <span class="n">Tf</span><span class="p">))</span> <span class="c1"># number of time steps</span>
 <span class="c1">#---------------------------------------------------------------</span>
-<span class="n">I</span>   <span class="o">=</span> <span class="n">sparse</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">N</span><span class="p">);</span>
+<span class="n">I</span>   <span class="o">=</span> <span class="n">sparse</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
 <span class="n">Dxx</span> <span class="o">=</span> <span class="n">sparse</span><span class="o">.</span><span class="n">diags</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">N</span><span class="p">))</span>
 
 <span class="n">A</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="p">(</span><span class="n">k</span> <span class="o">*</span> <span class="n">sig</span><span class="p">))</span> <span class="c1"># inverted</span>
-<span class="n">B</span> <span class="o">=</span> <span class="n">A</span> <span class="o">*</span> <span class="p">((</span><span class="n">lamb</span> <span class="o">**</span> <span class="mf">2.0</span><span class="p">)</span> <span class="o">*</span> <span class="n">Dxx</span> <span class="o">+</span> <span class="p">(</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">I</span><span class="p">));</span>
-<span class="n">C</span> <span class="o">=</span> <span class="n">A</span> <span class="o">*</span> <span class="p">((</span><span class="o">-</span><span class="mf">1.0</span> <span class="o">+</span> <span class="p">(</span><span class="n">k</span> <span class="o">*</span> <span class="n">sig</span><span class="p">))</span>  <span class="o">*</span> <span class="n">I</span><span class="p">);</span>
+<span class="n">B</span> <span class="o">=</span> <span class="n">A</span> <span class="o">*</span> <span class="p">((</span><span class="n">lamb</span> <span class="o">**</span> <span class="mf">2.0</span><span class="p">)</span> <span class="o">*</span> <span class="n">Dxx</span> <span class="o">+</span> <span class="p">(</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">I</span><span class="p">))</span>
+<span class="n">C</span> <span class="o">=</span> <span class="n">A</span> <span class="o">*</span> <span class="p">((</span><span class="o">-</span><span class="mf">1.0</span> <span class="o">+</span> <span class="p">(</span><span class="n">k</span> <span class="o">*</span> <span class="n">sig</span><span class="p">))</span>  <span class="o">*</span> <span class="n">I</span><span class="p">)</span>
 <span class="c1">#---------------------------------------------------------------</span>
 <span class="n">u0</span>  <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
 <span class="n">u1</span>  <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
@@ -1362,11 +1362,11 @@ C &amp;= A^{-1}(\sigma k - 1)I \\
 
 <span class="n">out</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="n">Nf</span><span class="p">)</span>
 
-<span class="n">li</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">floor</span><span class="p">(</span><span class="n">xi</span> <span class="o">*</span> <span class="n">N</span><span class="p">));</span> <span class="c1"># grid index of excitation</span>
-<span class="n">lo</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">floor</span><span class="p">(</span><span class="n">xo</span> <span class="o">*</span> <span class="n">N</span><span class="p">));</span> <span class="c1"># grid index of output</span>
+<span class="n">li</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">floor</span><span class="p">(</span><span class="n">xi</span> <span class="o">*</span> <span class="n">N</span><span class="p">))</span> <span class="c1"># grid index of excitation</span>
+<span class="n">lo</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">floor</span><span class="p">(</span><span class="n">xo</span> <span class="o">*</span> <span class="n">N</span><span class="p">))</span> <span class="c1"># grid index of output</span>
 <span class="c1">#---------------------------------------------------------------</span>
 
-<span class="n">u1</span><span class="p">[</span><span class="n">li</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">;</span>
+<span class="n">u1</span><span class="p">[</span><span class="n">li</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
 
 <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Nf</span><span class="p">):</span>
     <span class="n">u0</span> <span class="o">=</span> <span class="n">B</span> <span class="o">*</span> <span class="n">u1</span> <span class="o">+</span> <span class="n">C</span> <span class="o">*</span> <span class="n">u2</span>
