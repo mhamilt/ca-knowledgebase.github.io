@@ -1086,9 +1086,9 @@ T =  (2 f_0 L r)^{2}\rho \pi
 \]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">T</span> <span class="o">=</span> <span class="p">((</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">f0</span>  <span class="o">*</span> <span class="n">L</span> <span class="o">*</span> <span class="n">r</span><span class="p">)</span> <span class="o">**</span> <span class="mf">2.0</span><span class="p">)</span> <span class="o">*</span> <span class="n">rho</span> <span class="o">*</span> <span class="n">pi</span> <span class="c1"># Tension in Newtons</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">T</span> <span class="o">=</span> <span class="p">((</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">f0</span>  <span class="o">*</span> <span class="n">L</span> <span class="o">*</span> <span class="n">r</span><span class="p">)</span> <span class="o">**</span> <span class="mf">2.0</span><span class="p">)</span> <span class="o">*</span> <span class="n">rho</span> <span class="o">*</span> <span class="n">pi</span>  <span class="c1"># Tension in Newtons</span>
 <span class="n">A</span> <span class="o">=</span> <span class="n">pi</span> <span class="o">*</span> <span class="p">(</span><span class="n">r</span> <span class="o">**</span> <span class="mf">2.0</span><span class="p">)</span>         <span class="c1"># string cross-sectional area</span>
-<span class="n">c</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span> <span class="n">T</span> <span class="o">/</span> <span class="p">(</span><span class="n">rho</span> <span class="o">*</span> <span class="n">A</span><span class="p">))</span>    <span class="c1"># wave speed</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">T</span> <span class="o">/</span> <span class="p">(</span><span class="n">rho</span> <span class="o">*</span> <span class="n">A</span><span class="p">))</span>     <span class="c1"># wave speed</span>
 <span class="n">sig</span> <span class="o">=</span> <span class="mf">6.0</span> <span class="o">*</span> <span class="n">log</span><span class="p">(</span><span class="mf">10.0</span><span class="p">)</span> <span class="o">/</span> <span class="n">T60</span> <span class="c1"># loss parameter</span>
 </pre></div>
 </div>
@@ -1109,14 +1109,14 @@ T =  (2 f_0 L r)^{2}\rho \pi
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">k</span>    <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">SR</span> <span class="c1"># time step</span>
-<span class="n">hmin</span> <span class="o">=</span> <span class="n">c</span> <span class="o">*</span> <span class="n">k</span>    <span class="c1"># stability condition </span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">k</span>    <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">SR</span>  <span class="c1"># time step</span>
+<span class="n">hmin</span> <span class="o">=</span> <span class="n">c</span> <span class="o">*</span> <span class="n">k</span>     <span class="c1"># stability condition</span>
 
-<span class="n">N</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">floor</span><span class="p">(</span><span class="n">L</span> <span class="o">/</span> <span class="n">hmin</span><span class="p">))</span>   <span class="c1"># number of segments (N+1 is number of grid points)</span>
-<span class="n">h</span> <span class="o">=</span> <span class="n">L</span> <span class="o">/</span> <span class="n">N</span>                  <span class="c1"># adjusted grid spacing</span>
+<span class="n">N</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">floor</span><span class="p">(</span><span class="n">L</span> <span class="o">/</span> <span class="n">hmin</span><span class="p">))</span>    <span class="c1"># number of segments (N+1 is number of grid points)</span>
+<span class="n">h</span> <span class="o">=</span> <span class="n">L</span> <span class="o">/</span> <span class="n">N</span>                   <span class="c1"># adjusted grid spacing</span>
 
-<span class="n">lamb</span> <span class="o">=</span> <span class="n">c</span> <span class="o">*</span> <span class="n">k</span> <span class="o">/</span> <span class="n">h</span>           <span class="c1"># Courant number</span>
-<span class="n">Nf</span>   <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">floor</span><span class="p">(</span><span class="n">SR</span> <span class="o">*</span> <span class="n">Tf</span><span class="p">))</span> <span class="c1"># number of time steps</span>
+<span class="n">lamb</span> <span class="o">=</span> <span class="n">c</span> <span class="o">*</span> <span class="n">k</span> <span class="o">/</span> <span class="n">h</span>            <span class="c1"># Courant number</span>
+<span class="n">Nf</span>   <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">floor</span><span class="p">(</span><span class="n">SR</span> <span class="o">*</span> <span class="n">Tf</span><span class="p">))</span>  <span class="c1"># number of time steps</span>
 </pre></div>
 </div>
 </div>
@@ -1169,7 +1169,7 @@ C &amp;= A^{-1}(\sigma k - 1)I \\
 <p>Given all the ground work that has been done, we can now pretty much just write that.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="p">(</span><span class="n">k</span> <span class="o">*</span> <span class="n">sig</span><span class="p">))</span> <span class="c1"># inverted</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="p">(</span><span class="n">k</span> <span class="o">*</span> <span class="n">sig</span><span class="p">))</span>  <span class="c1"># inverted</span>
 <span class="n">B</span> <span class="o">=</span> <span class="n">A</span> <span class="o">*</span> <span class="p">((</span><span class="n">lamb</span> <span class="o">**</span> <span class="mf">2.0</span><span class="p">)</span> <span class="o">*</span> <span class="n">Dxx</span> <span class="o">+</span> <span class="p">(</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">I</span><span class="p">))</span>
 <span class="n">C</span> <span class="o">=</span> <span class="n">A</span> <span class="o">*</span> <span class="p">((</span><span class="o">-</span><span class="mf">1.0</span> <span class="o">+</span> <span class="p">(</span><span class="n">k</span> <span class="o">*</span> <span class="n">sig</span><span class="p">))</span>  <span class="o">*</span> <span class="n">I</span><span class="p">)</span>
 </pre></div>
@@ -1219,9 +1219,9 @@ C &amp;= A^{-1}(\sigma k - 1)I \\
 <p>There are only 3 time steps in the scheme. This means we only need 3 vectors which we can swap each time step. The states in our scheme <span class="math notranslate nohighlight">\(u^{n}\)</span>, <span class="math notranslate nohighlight">\(u^{n-1}\)</span>, and <span class="math notranslate nohighlight">\(u^{n-2}\)</span> can be will be represented by <code class="docutils literal notranslate"><span class="pre">u0</span></code>, <code class="docutils literal notranslate"><span class="pre">u1</span></code>, and <code class="docutils literal notranslate"><span class="pre">u2</span></code> respectively.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">u0</span>  <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
-<span class="n">u1</span>  <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
-<span class="n">u2</span>  <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">u0</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+<span class="n">u1</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+<span class="n">u2</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1262,7 +1262,7 @@ C &amp;= A^{-1}(\sigma k - 1)I \\
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Nf</span><span class="p">):</span>
     <span class="n">u0</span> <span class="o">=</span> <span class="n">B</span> <span class="o">*</span> <span class="n">u1</span> <span class="o">+</span> <span class="n">C</span> <span class="o">*</span> <span class="n">u2</span>
-    <span class="n">u2</span><span class="p">,</span> <span class="n">u1</span><span class="p">,</span> <span class="n">u0</span> <span class="o">=</span> <span class="n">u1</span><span class="p">,</span> <span class="n">u0</span><span class="p">,</span> <span class="n">u2</span> <span class="c1"># state swap</span>
+    <span class="n">u2</span><span class="p">,</span> <span class="n">u1</span><span class="p">,</span> <span class="n">u0</span> <span class="o">=</span> <span class="n">u1</span><span class="p">,</span> <span class="n">u0</span><span class="p">,</span> <span class="n">u2</span>  <span class="c1"># state swap</span>
     <span class="n">out</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">u0</span><span class="p">[</span><span class="n">lo</span><span class="p">]</span>
 </pre></div>
 </div>
